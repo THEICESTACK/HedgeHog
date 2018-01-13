@@ -17,28 +17,13 @@
     </h1>
     <p>Javascript Plugin to allow better accessibility and more robost.</p>
 
-    <button id="popIt">PopUp</button>
+    <button type="button" id="popIt">PopUp</button>
 
-    <!-- Modal -->
-<div class="modal" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" style="display: none;">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h2 class="modal-title" id="title">Modal title</h5>
-        <button type="button" class="closeBtn" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        This will be really really really really cool but I don't know I still have to figure things out. Hopefully I'll figure things out soon.
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
-      </div>
-    </div>
+    <div id="content">
+    <h1>Look at me!</h1>
+    <p>I'm a modal window.</p>
   </div>
-</div>
+
 
     <!-- /js -->
     <script type="text/javascript" src="hedgehog.js"></script>
@@ -46,15 +31,19 @@
     <script type="text/javascript">
 
     (function() {
+
+      var hhogModal = new HhogModal({
+              content: 'sssd'
+            });
+      
         document.getElementById("popIt").addEventListener("click", function(){
         console.log('got here');
         
-        var hhogModal = new HhogModal();
-        console.log(hhogModal);
+            hhogModal.open();
 
       });
 
-    })();
+    }());
       
       
     </script>

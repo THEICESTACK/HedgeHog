@@ -8,8 +8,12 @@
        this.modal = null;
        this.overlay = null;
 
+       // Determine proper prefix
+       this.transitionEnd = transitionSelect();
+
        // Option Defaults
        var defaults = {
+           autoOpen: false,
            className: 'fade-and-drop',
            closeButton: true,
            content: "",
@@ -21,11 +25,14 @@
 
         // Create options by extending defaults with the passed in arugments
         if (arguments[0] && typeof arguments[0] === "object") {
-        this.options = extendDefaults(defaults, arguments[0]);
+            this.options = extendDefaults(defaults, arguments[0]);
+        }
+       
+        if(this.options.autoOpen === true) {
+            this.open();
         }
 
-    };
-
+    }
 
         // public methods
         HhogModal.prototype.open = function() {
@@ -41,7 +48,38 @@
              */
             window.getComputedStyle(this.modal).height;
 
-            
+            /* 
+            * Add Open class and check if the modal is taller than the window
+            * If so, our anchored class is also applied
+            */
+            this.modal.className = this.modal.className + 
+                (this.modal.offsetHeight > window.innerHeight ?
+                " scotch-open scotch-anchored" : " scotch-open");
+            this.overlay.className = this.overlay.className + " scotch-open";
+
+        }
+
+        HhogModal.prototype.close = function() {
+            // store the value of this 
+            var _ = this;
+
+            // remove the open class name 
+            this.modal.className = this.modal.className.replace(" scotch-open", "");
+            this.overlay.className = this.overlay.className.replace(" scotch-open", "");
+
+            /* this will listen for CSS transitionend event and then
+             * then remove the nodes from the DOM
+            */
+            this.modal.addEventListener(this.transitionEnd, function() {
+                _.modal.parentNode.removeChild(_.modal);
+            });
+            this.overlay.addEventListener(this.transitionEnd, function() {
+                if(_.overlay.parentNode){
+                    _.overlay.parentNode.removeChild(_.overlay);
+                }
+            });
+
+
         }
 
         // private method
@@ -69,7 +107,7 @@
             if(this.options.closeButton === true) {
                 this.closeButton = document.createElement("button") // create wrapper button for modal
                 this.closeButton.className = "scotch-close close-button";
-                this.closeButton.innerHtml = "&times;";
+                this.closeButton.innerHTML = "x";
                 this.modal.appendChild(this.closeButton);
             } 
 
@@ -95,6 +133,17 @@
 
         }
 
+        // Utility method to extend defaults with user options
+        function extendDefaults(source, properties) {
+            var property;
+            for (property in properties) {
+                if (properties.hasOwnProperty(property)) {
+                    source[property] = properties[property];
+                }
+            }
+            return source;
+        }
+
         // attaching method events
         function initializeEvents() {
 
@@ -106,20 +155,18 @@
                 this.overlay.addEventListener('click', this.close.bind(this)); // if click, bind to outerlay
             }
         }
+
+        // Utility method to determine which transitionEnd event is supported 
+        function transitionSelect() {
+            var el = document.createElement("div");
+            if(el.style.webkitTransition)
+                return "webkitTransitionEnd";
+            if(el.style.OTransition)
+                return "OTransitionEnd"
             
-        // Utility method to extend defaults with user options
-        function extendDefaults(source, properties) {
-
-            console.log('here');
-            var property;
-            for (property in properties) {
-            if (properties.hasOwnProperty(property)) {
-                source[property] = properties[property];
-            }
-            }
-            return source;
+            return 'transitionend';
         }
-
-       
+            
+        
 
 }());
