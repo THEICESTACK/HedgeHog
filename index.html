@@ -1,0 +1,62 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HedgeHog Modal</title>
+
+<!-- /style -->
+  <link rel="stylesheet" type="text/css" href="hedgehog.css">
+
+  </head>
+  <body>
+
+    <h1>
+        HedgeHog Modal Popup Dialog
+    </h1>
+    <p>Javascript Plugin to allow better accessibility and more robost.</p>
+
+    <button id="popIt">PopUp</button>
+
+    <!-- Modal -->
+<div class="modal" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" style="display: none;">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 class="modal-title" id="title">Modal title</h5>
+        <button type="button" class="closeBtn" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        This will be really really really really cool but I don't know I still have to figure things out. Hopefully I'll figure things out soon.
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+    <!-- /js -->
+    <script type="text/javascript" src="hedgehog.js"></script>
+
+    <script type="text/javascript">
+
+    (function() {
+        document.getElementById("popIt").addEventListener("click", function(){
+        console.log('got here');
+
+        HhogModal.alert({message: 'somdk'});
+
+      });
+
+    })();
+      
+      
+    </script>
+
+  </body>
+</html>
