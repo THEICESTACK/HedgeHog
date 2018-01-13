@@ -48,8 +48,9 @@
     (function() {
         document.getElementById("popIt").addEventListener("click", function(){
         console.log('got here');
-
-        HhogModal.alert({message: 'somdk'});
+        
+        var hhogModal = new HhogModal();
+        console.log(hhogModal);
 
       });
 
