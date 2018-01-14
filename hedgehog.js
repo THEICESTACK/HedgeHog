@@ -14,6 +14,7 @@
        // Option Defaults
        var defaults = {
            autoOpen: false,
+           title: "",
            className: 'fade-and-drop',
            closeButton: true,
            content: "",
@@ -86,7 +87,7 @@
 
         function buildOut() {
 
-            var content, contentHolder, docFrag;
+            var  headerHolder, title, content, contentHolder, docFrag;
 
             if(typeof this.options.content === "string"){
                 content = this.options.content;
@@ -94,6 +95,7 @@
             else {
                 content = this.options.content.innerHtml;
             }
+
 
             docFrag = document.createDocumentFragment(); // method extract parts of your document, change, add, or delete, some of the content, and insert it back to your documents
 
@@ -103,9 +105,24 @@
             this.modal.style.minWidth = this.options.minWidth + "px"; // add minwidth style
             this.modal.style.maxWidth = this.options.maxWidth + "px"; // add maxWidth = 
 
+            
+            // if title option exist or if there's a title then add to modal
+            if(this.options.title){
+                title = document.createElement("h4");
+                title.className = "hhg-title";
+                title.innerHTML = this.options.title;
+               
+            }
+
+            headerHolder = document.createElement("div");
+            headerHolder.className = "hhg-modal-header";
+            headerHolder.appendChild(title);
+            this.modal.appendChild(headerHolder);
+
+
             // if closeButton option is true then add a close button to modal
             if(this.options.closeButton === true) {
-                this.closeButton = document.createElement("button") // create wrapper button for modal
+                this.closeButton = document.createElement("button"); // create wrapper button for modal
                 this.closeButton.className = "scotch-close close-button";
                 this.closeButton.innerHTML = "x";
                 this.modal.appendChild(this.closeButton);

@@ -225,3 +225,17 @@ body
     border-top: 5px solid white;
     box-shadow: none;
 }
+
+.hhg-modal-header {
+    height: 30%;
+    padding: 10px;
+    width: 100%;
+    position: absolute;
+    right: 0px;
+    top: 0;
+    border-bottom: 1px solid #333;
+}
+
+.hhg-title {
+    margin: 0;
+}

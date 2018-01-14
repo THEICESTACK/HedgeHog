@@ -7,24 +7,25 @@
     <title>HedgeHog Modal</title>
 
 <!-- /style -->
-  <link rel="stylesheet" type="text/css" href="hedgehog.css">
+  <link rel="stylesheet" type="text/css" href="assets/css/style.css" />
+  <link rel="stylesheet" type="text/css" href="hedgehog.css" />
 
   </head>
   <body>
 
-    <h1>
+    <div class="container">
+
+      <h1>
         HedgeHog Modal Popup Dialog
-    </h1>
-    <p>Javascript Plugin to allow better accessibility and more robost.</p>
+      </h1>
+      <p>Javascript Plugin to allow better accessibility and more robost.</p>
 
-    <button type="button" id="popIt">PopUp</button>
-
-    <div id="content">
-    <h1>Look at me!</h1>
-    <p>I'm a modal window.</p>
-  </div>
+      <button type="button" id="popIt">PopUp</button>
 
 
+    </div>
+
+    
     <!-- /js -->
     <script type="text/javascript" src="hedgehog.js"></script>
 
@@ -33,7 +34,8 @@
     (function() {
 
       var hhogModal = new HhogModal({
-              content: 'sssd'
+              title: "HedgeHog Modal",
+              content: "<p>This is something soo so so so cool</p><p>Yup!</p>"
             });
       
         document.getElementById("popIt").addEventListener("click", function(){
